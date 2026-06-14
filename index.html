@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grupo RA · Studio</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --n:#0D2347;--nm:#1a3a6b;--g:#C9A84C;--gl:#E8C87A;--gp:#F5E6BC;
+  --cr:#FDFAF4;--w:#fff;--mu:#6B7A9A;--bd:rgba(13,35,71,0.12);
+  --grn:#166534;--grnbg:#dcfce7;--amb:#92400e;--ambbg:#fef3c7;
+}
+html,body{font-family:'DM Sans',sans-serif;background:var(--cr);color:var(--n);height:100%;margin:0}
+.app{display:flex;flex-direction:column;min-height:100vh}
+/* HEADER */
+.hdr{background:var(--n);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:2px solid var(--g)}
+.lm{width:38px;height:38px;background:var(--g);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--n);flex-shrink:0}
+.ht h1{font-family:'Playfair Display',serif;font-size:14px;font-weight:600;color:#fff;line-height:1.2}
+.ht p{font-size:10px;color:var(--gl);letter-spacing:.04em}
+.mode-toggle{display:flex;gap:3px;margin-left:auto;flex-wrap:wrap}
+.mt-btn{padding:4px 10px;border-radius:5px;font-size:10px;font-weight:600;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.mt-btn.on{background:var(--g);color:var(--n)}
+.mt-btn.off{background:rgba(255,255,255,.12);color:var(--gl)}
+/* LAYOUT */
+.main-layout{display:flex;flex:1}
+.sidebar{background:var(--n);width:54px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding:8px 0;gap:2px;overflow-y:auto}
+.sb-btn{width:42px;height:42px;border-radius:8px;border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:all .15s;color:rgba(255,255,255,.45)}
+.sb-btn i{font-size:18px}
+.sb-btn span{font-size:7px;font-weight:600;color:inherit}
+.sb-btn.active,.sb-btn:hover{background:rgba(201,168,76,.18);color:var(--g)}
+.sb-sep{width:28px;height:1px;background:rgba(255,255,255,.1);margin:3px 0}
+.content-area{flex:1;overflow-y:auto}
+.panel{display:none;padding:16px}
+.panel.active{display:block}
+/* COMPONENTS */
+.gb{height:2px;background:linear-gradient(90deg,var(--g),var(--gl),var(--g));border-radius:2px;margin-bottom:12px}
+.st{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--n);margin-bottom:2px}
+.ss{font-size:11px;color:var(--mu);margin-bottom:12px}
+.card{background:var(--w);border:1px solid var(--bd);border-radius:10px;padding:14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(13,35,71,.06)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:9px}
+label{font-size:10px;font-weight:600;color:var(--n);letter-spacing:.05em;text-transform:uppercase;display:block;margin-bottom:4px}
+select,textarea,input[type=text]{width:100%;padding:8px 11px;border:1px solid var(--bd);border-radius:7px;font-size:12px;font-family:'DM Sans',sans-serif;color:var(--n);background:var(--cr);outline:none;transition:border-color .2s}
+select:focus,textarea:focus,input:focus{border-color:var(--g)}
+textarea{resize:vertical;min-height:64px;line-height:1.5}
+.bg{background:var(--g);color:var(--n);border:none;padding:9px 16px;border-radius:7px;font-size:12px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .15s}
+.bg:hover{background:var(--gl)}
+.bo{background:transparent;color:var(--n);border:1.5px solid var(--bd);padding:7px 13px;border-radius:7px;font-size:11px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .15s}
+.bo:hover{border-color:var(--g)}
+.cbtn{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:5px 10px;border-radius:6px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--mu);font-family:'DM Sans',sans-serif;transition:all .15s}
+.cbtn:hover{background:var(--n);color:#fff;border-color:var(--n)}
+.tp{padding:4px 11px;border-radius:16px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--mu);font-family:'DM Sans',sans-serif;transition:all .15s}
+.tp.a{background:var(--n);color:#fff;border-color:var(--n)}
+.tps{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:9px}
+.tnb{padding:4px 11px;border-radius:6px;font-size:10px;font-weight:500;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--mu);font-family:'DM Sans',sans-serif;transition:all .15s}
+.tnb.s{background:var(--n);color:#fff;border-color:var(--n)}
+.rbx{background:var(--w);border:1.5px solid var(--gp);border-radius:10px;padding:14px;margin-top:12px}
+.rl{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--g);margin-bottom:8px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.rt{font-size:13px;line-height:1.75;color:var(--n);font-family:'Crimson Pro',serif;white-space:pre-wrap}
+.ncite{background:var(--n);color:var(--gp);font-size:10px;padding:7px 11px;border-radius:6px;margin-top:8px;line-height:1.5}
+.ncite strong{color:var(--g)}
+.disc{background:var(--ambbg);border:1px solid rgba(201,168,76,.25);border-radius:6px;padding:7px 11px;font-size:10px;color:var(--amb);margin-top:7px}
+.ld{text-align:center;padding:24px}
+.dots{display:inline-flex;gap:4px;align-items:center}
+.dots span{width:7px;height:7px;background:var(--g);border-radius:50%;animation:bk 1.2s infinite}
+.dots span:nth-child(2){animation-delay:.2s}.dots span:nth-child(3){animation-delay:.4s}
+@keyframes bk{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-7px)}}
+.dv{height:1px;background:var(--bd);margin:9px 0}
+.nrow{background:var(--n);border-radius:9px;padding:11px 13px;margin-bottom:11px;display:flex;align-items:flex-start;gap:9px}
+.nrow i{color:var(--g);font-size:18px;flex-shrink:0;margin-top:1px}
+.nrow h3{font-size:11px;font-weight:700;color:var(--g);margin-bottom:3px}
+.nrow p{font-size:10px;color:rgba(255,255,255,.78);line-height:1.45}
+.pc{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:11px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.pc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--g)}
+.pc:hover{border-color:var(--g);transform:translateY(-1px)}
+.pt{font-size:11px;font-weight:700;color:var(--n);margin-bottom:2px}
+.pd{font-size:10px;color:var(--mu);line-height:1.35}
+.pn{font-size:9px;color:var(--g);font-weight:600;margin-top:3px}
+.stat-r{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:13px}
+.sc2{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:10px;text-align:center}
+.sn{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--n)}
+.sl{font-size:9px;color:var(--mu);font-weight:500;margin-top:1px}
+.hi{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid var(--bd);align-items:flex-start}
+.hic{width:28px;height:28px;border-radius:6px;background:var(--gp);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--n);font-size:13px}
+.htl{font-size:11px;font-weight:600;color:var(--n)}
+.hpr{font-size:10px;color:var(--mu);margin-top:1px;line-height:1.35}
+.peak-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
+.peak-card{background:var(--w);border:1px solid var(--bd);border-radius:7px;padding:9px;text-align:center}
+.peak-time{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--n)}
+.peak-lbl{font-size:9px;color:var(--mu);margin-top:1px}
+.peak-eng{font-size:10px;font-weight:600;color:var(--grn);margin-top:3px}
+.queue-item{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:10px;margin-bottom:7px;display:flex;gap:9px;align-items:flex-start}
+.qi-time{background:var(--n);color:var(--g);font-size:10px;font-weight:700;padding:4px 8px;border-radius:5px;white-space:nowrap;flex-shrink:0;text-align:center;min-width:52px}
+.qi-text{flex:1;font-size:11px;color:var(--n);line-height:1.45}
+.pub-btn{background:var(--grn);color:#fff;border:none;border-radius:5px;padding:4px 9px;font-size:10px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.del-btn{background:transparent;color:var(--mu);border:1px solid var(--bd);border-radius:5px;padding:3px 7px;font-size:10px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.wa-acc{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:10px;margin-bottom:7px;display:flex;align-items:center;gap:9px}
+.wa-av{width:34px;height:34px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;flex-shrink:0}
+.reel-slide{background:var(--n);border-radius:9px;padding:13px;margin-bottom:8px;border-left:3px solid var(--g)}
+.reel-num{font-size:9px;font-weight:700;color:var(--g);letter-spacing:.06em;margin-bottom:4px}
+.reel-text{font-size:12px;color:#fff;line-height:1.55}
+.carr-slide{background:var(--w);border:1px solid var(--bd);border-radius:9px;padding:11px;margin-bottom:7px;border-left:3px solid var(--n)}
+.carr-num{font-size:9px;font-weight:700;color:var(--n);letter-spacing:.05em;margin-bottom:3px}
+.carr-title{font-size:13px;font-weight:700;color:var(--n);margin-bottom:3px}
+.carr-body{font-size:11px;color:var(--mu);line-height:1.5}
+.presc-result{background:var(--w);border:2px solid var(--bd);border-radius:9px;padding:13px;margin-top:10px}
+.presc-ok{border-color:#27ae60}.presc-warn{border-color:#f39c12}.presc-danger{border-color:#e74c3c}
+.presc-days{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;margin-bottom:4px}
+.presc-green{color:#27ae60}.presc-amber{color:#f39c12}.presc-red{color:#e74c3c}
+.cfg-banner{background:linear-gradient(135deg,#1a3a6b,#0D2347);border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:14px;margin-bottom:14px}
+.cfg-banner h3{font-size:13px;font-weight:700;color:var(--g);margin-bottom:6px}
+.cfg-banner p{font-size:11px;color:rgba(255,255,255,.75);line-height:1.5;margin-bottom:10px}
+.cfg-row{display:flex;gap:7px;align-items:center}
+.cfg-input{flex:1;padding:8px 12px;border-radius:7px;border:1px solid rgba(201,168,76,.4);background:rgba(0,0,0,.3);color:var(--gl);font-family:'DM Sans',sans-serif;font-size:12px;outline:none}
+.cfg-input:focus{border-color:var(--g)}
+.cfg-save{background:var(--g);color:var(--n);border:none;padding:8px 14px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.cfg-status{font-size:10px;margin-top:6px;display:flex;align-items:center;gap:5px}
+.sd{width:7px;height:7px;border-radius:50%;display:inline-block}
+.sd-g{background:#27ae60}.sd-r{background:#e74c3c}.sd-a{background:#f39c12}
+.err-box{background:#fdf0ef;border:1px solid #fcc;border-radius:7px;padding:10px 12px;font-size:11px;color:#c0392b;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="hdr">
+  <div class="lm">RA</div>
+  <div class="ht">
+    <h1>Grupo RA · Studio Ultimate</h1>
+    <p>Marketing Jurídico con IA</p>
+  </div>
+  <div class="mode-toggle">
+    <button class="mt-btn on" onclick="setMode('est',this)">Estudio</button>
+    <button class="mt-btn off" onclick="setMode('art',this)">ART</button>
+    <button class="mt-btn off" onclick="setMode('cob',this)">Cobranzas</button>
+    <button class="mt-btn off" onclick="setMode('inpi',this)">INPI</button>
+  </div>
+</div>
+
+<div class="main-layout">
+<div class="sidebar">
+  <button class="sb-btn active" onclick="nav('generar')" id="sb-generar"><i class="ti ti-sparkles"></i><span>Crear</span></button>
+  <button class="sb-btn" onclick="nav('calendario')" id="sb-calendario"><i class="ti ti-calendar"></i><span>Agenda</span></button>
+  <button class="sb-btn" onclick="nav('reels')" id="sb-reels"><i class="ti ti-video"></i><span>Reels</span></button>
+  <button class="sb-btn" onclick="nav('carrusel')" id="sb-carrusel"><i class="ti ti-layout-columns"></i><span>Carrus.</span></button>
+  <button class="sb-btn" onclick="nav('dms')" id="sb-dms"><i class="ti ti-message-circle"></i><span>DMs</span></button>
+  <div class="sb-sep"></div>
+  <button class="sb-btn" onclick="nav('plantillas')" id="sb-plantillas"><i class="ti ti-layout-grid"></i><span>Témpl.</span></button>
+  <button class="sb-btn" onclick="nav('whatsapp')" id="sb-whatsapp"><i class="ti ti-brand-whatsapp"></i><span>WA</span></button>
+  <button class="sb-btn" onclick="nav('prescripciones')" id="sb-prescripciones"><i class="ti ti-clock-check"></i><span>Presc.</span></button>
+  <div class="sb-sep"></div>
+  <button class="sb-btn" onclick="nav('config')" id="sb-config"><i class="ti ti-settings"></i><span>Config.</span></button>
+  <button class="sb-btn" onclick="nav('historial')" id="sb-historial"><i class="ti ti-history"></i><span>Hist.</span></button>
+</div>
+
+<div class="content-area">
+
+<!-- GENERAR -->
+<div class="panel active" id="panel-generar">
+<div class="gb"></div>
+<p class="st" id="gen-title">Generador de Contenido</p>
+<p class="ss">Publicaciones jurídicas precisas con normativa argentina vigente</p>
+<div class="nrow"><i class="ti ti-scale"></i><div><h3>Base normativa activa</h3><p>CCyCN Ley 26.994 · LCT 20.744 · Ley 24.240 · Ley 26.485 · Ley 27.551 · Ley 24.557 (ART) · Ley 22.362 (Marcas) · CPCC · Código Penal</p></div></div>
+<div class="card">
+  <div class="g2">
+    <div><label>Área del Derecho</label>
+    <select id="area-sel">
+      <option value="">Seleccioná...</option>
+      <optgroup label="Derecho Privado">
+        <option value="laboral">Laboral (LCT)</option>
+        <option value="familia">Familia (CCyCN)</option>
+        <option value="civil">Civil (CCyCN)</option>
+        <option value="contratos">Contratos</option>
+        <option value="sucesiones">Sucesiones</option>
+        <option value="inquilinos">Inquilinario</option>
+      </optgroup>
+      <optgroup label="Consumidor / Daños">
+        <option value="consumidor">Defensa Consumidor</option>
+        <option value="accidentes">Accidentes Tránsito</option>
+        <option value="daños">Daños y Perjuicios</option>
+      </optgroup>
+      <optgroup label="Penal / Público">
+        <option value="penal">Penal</option>
+        <option value="genero">Violencia de Género</option>
+        <option value="administrativo">Administrativo</option>
+      </optgroup>
+      <optgroup label="Especialidades Grupo RA">
+        <option value="art">ART / Accidentes Laborales</option>
+        <option value="cobranzas">Cobranzas y Recupero</option>
+        <option value="expensas">Ejecución de Expensas</option>
+        <option value="inpi">Registro de Marcas (INPI)</option>
+        <option value="morosidad">Control de Morosidad</option>
+        <option value="negociacion">Negociación Extrajudicial</option>
+      </optgroup>
+    </select></div>
+    <div><label>Red Social</label>
+    <select id="red-sel">
+      <option value="instagram">Instagram (caption)</option>
+      <option value="ig_edu">Instagram (educativo)</option>
+      <option value="linkedin">LinkedIn</option>
+      <option value="whatsapp">Estado WhatsApp</option>
+      <option value="facebook">Facebook</option>
+      <option value="twitter">Twitter/X (hilo)</option>
+    </select></div>
+  </div>
+  <div style="margin-bottom:9px"><label>Tipo de pieza</label>
+  <div class="tps">
+    <button class="tp a" onclick="setTp(this,'consejo')">💡 Consejo</button>
+    <button class="tp" onclick="setTp(this,'derechos')">⚖️ Derechos</button>
+    <button class="tp" onclick="setTp(this,'mito')">❌ Mito vs Real</button>
+    <button class="tp" onclick="setTp(this,'caso')">📋 Caso práctico</button>
+    <button class="tp" onclick="setTp(this,'cta')">📞 Captación</button>
+    <button class="tp" onclick="setTp(this,'dato')">📊 Dato impactante</button>
+    <button class="tp" onclick="setTp(this,'proceso')">📑 Paso a paso</button>
+  </div></div>
+  <div style="margin-bottom:9px"><label>Tono</label>
+  <div class="tps">
+    <button class="tnb s" onclick="setTn(this,'profesional y cercano')">Profesional</button>
+    <button class="tnb" onclick="setTn(this,'empático y humano')">Empático</button>
+    <button class="tnb" onclick="setTn(this,'directo e informativo')">Directo</button>
+    <button class="tnb" onclick="setTn(this,'motivador')">Motivador</button>
+    <button class="tnb" onclick="setTn(this,'didáctico')">Didáctico</button>
+  </div></div>
+  <div class="g2">
+    <div><label>Tema específico</label><textarea id="tema-in" placeholder="Ej: despido sin causa, cuota alimentaria..." rows="2"></textarea></div>
+    <div><label>Normativa</label>
+    <select id="norm-ex">
+      <option value="">Auto-detectar</option>
+      <option value="CCyCN Ley 26.994">CCyCN General</option>
+      <option value="LCT Ley 20.744">LCT Laboral</option>
+      <option value="Ley 24.240">Defensa Consumidor</option>
+      <option value="Ley 26.485">Violencia de Género</option>
+      <option value="Ley 27.551">Alquileres</option>
+      <option value="Ley 24.557">LRT / ART</option>
+      <option value="Ley 22.362">Marcas INPI</option>
+      <option value="Código Penal">Código Penal</option>
+    </select></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:9px">
+    <label style="display:flex;align-items:center;gap:5px;text-transform:none;font-size:11px;cursor:pointer;margin-bottom:0"><input type="checkbox" id="chk-disc" checked style="width:auto;accent-color:var(--g)"> Aviso legal</label>
+  </div>
+  <div style="display:flex;gap:7px;justify-content:flex-end;flex-wrap:wrap">
+    <button class="bo" onclick="generar3()"><i class="ti ti-stack"></i> 3 versiones</button>
+    <button class="bg" onclick="generarUno()"><i class="ti ti-sparkles"></i> Generar</button>
+  </div>
+</div>
+<div id="ld-gen" class="ld" style="display:none"><div class="dots"><span></span><span></span><span></span></div><p style="margin-top:9px;font-size:11px;color:var(--mu)">Generando contenido...</p></div>
+<div class="rbx" id="rbx-gen" style="display:none">
+  <div class="rl"><i class="ti ti-stars"></i><span id="rl-txt">Contenido generado</span></div>
+  <div class="rt" id="rt-txt"></div>
+  <div id="nc-box" class="ncite" style="display:none"></div>
+  <div id="dc-box" class="disc" style="display:none"></div>
+  <div class="dv"></div>
+  <div style="display:flex;gap:5px;flex-wrap:wrap">
+    <button class="cbtn" onclick="copEl('rt-txt')"><i class="ti ti-copy"></i> Copiar</button>
+    <button class="cbtn" onclick="generarUno()"><i class="ti ti-refresh"></i> Regenerar</button>
+  </div>
+</div>
+<div id="multi-results" style="display:none;margin-top:10px"></div>
+</div>
+
+<!-- CALENDARIO -->
+<div class="panel" id="panel-calendario">
+<div class="gb"></div>
+<p class="st">Calendario de Publicaciones</p>
+<p class="ss">Horarios pico Argentina · Programá tu semana</p>
+<div style="margin-bottom:10px"><label>Horarios pico recomendados</label>
+<div class="peak-row">
+  <div class="peak-card"><div class="peak-time">8:00</div><div class="peak-lbl">Mañana</div><div class="peak-eng">+62% alcance</div></div>
+  <div class="peak-card"><div class="peak-time">12:30</div><div class="peak-lbl">Mediodía</div><div class="peak-eng">+71% alcance</div></div>
+  <div class="peak-card"><div class="peak-time">19:00</div><div class="peak-lbl">Tarde-noche</div><div class="peak-eng">+88% alcance</div></div>
+  <div class="peak-card"><div class="peak-time">21:30</div><div class="peak-lbl">Noche</div><div class="peak-eng">+79% alcance</div></div>
+</div></div>
+<div class="card">
+  <div class="g2">
+    <div><label>Área</label><select id="cal-area"><option value="laboral">Laboral</option><option value="familia">Familia</option><option value="consumidor">Consumidor</option><option value="art">ART</option><option value="cobranzas">Cobranzas</option><option value="inpi">INPI</option><option value="penal">Penal</option><option value="accidentes">Accidentes</option></select></div>
+    <div><label>Cantidad</label><select id="cal-qty"><option value="3">3 publicaciones</option><option value="5">5 publicaciones</option><option value="7">Semana (7)</option></select></div>
+  </div>
+  <div style="text-align:right"><button class="bg" onclick="generarCalendario()"><i class="ti ti-calendar-event"></i> Generar calendario</button></div>
+</div>
+<div id="ld-cal" class="ld" style="display:none"><div class="dots"><span></span><span></span><span></span></div></div>
+<div id="cal-queue" style="display:none"><p style="font-size:11px;font-weight:700;color:var(--n);margin-bottom:8px">Cola programada</p><div id="cal-items"></div></div>
+</div>
+
+<!-- REELS -->
+<div class="panel" id="panel-reels">
+<div class="gb"></div>
+<p class="st">Generador de Reels</p>
+<p class="ss">Guiones para videos jurídicos de alto impacto</p>
+<div class="card">
+  <div><label>Tema</label><textarea id="reel-tema" placeholder="Ej: Qué hacer si te despiden sin causa · Derechos del inquilino..." rows="2" style="margin-bottom:9px"></textarea></div>
+  <div class="g2">
+    <div><label>Formato</label><select id="reel-fmt"><option value="educativo">Educativo</option><option value="storytelling">Storytelling</option><option value="mito">Desmintiendo mitos</option><option value="lista">Lista rápida</option></select></div>
+    <div><label>Duración</label><select id="reel-dur"><option value="30">30 segundos</option><option value="60" selected>60 segundos</option><option value="90">90 segundos</option></select></div>
+  </div>
+  <div style="text-align:right"><button class="bg" onclick="generarReel()"><i class="ti ti-video"></i> Generar guión</button></div>
+</div>
+<div id="ld-reel" class="ld" style="display:none"><div class="dots"><span></span><span></span><span></span></div></div>
+<div id="reel-result" style="display:none"></div>
+</div>
+
+<!-- CARRUSEL -->
+<div class="panel" id="panel-carrusel">
+<div class="gb"></div>
+<p class="st">Generador de Carruseles</p>
+<p class="ss">Carruseles educativos de alto engagement</p>
+<div class="card">
+  <div><label>Tema</label><textarea id="carr-tema" placeholder="Ej: 5 pasos para reclamar por despido · Guía del inquilino..." rows="2" style="margin-bottom:9px"></textarea></div>
+  <div class="g2">
+    <div><label>Slides</label><select id="carr-slides"><option value="5">5 slides</option><option value="7" selected>7 slides</option><option value="10">10 slides</option></select></div>
+    <div><label>Plataforma</label><select id="carr-red"><option value="Instagram">Instagram</option><option value="LinkedIn">LinkedIn</option></select></div>
+  </div>
+  <div style="text-align:right"><button class="bg" onclick="generarCarrusel()"><i class="ti ti-layout-columns"></i> Generar carrusel</button></div>
+</div>
+<div id="ld-carr" class="ld" style="display:none"><div class="dots"><span></span><span></span><span></span></div></div>
+<div id="carr-result" style="display:none"></div>
+</div>
+
+<!-- DMs -->
+<div class="panel" id="panel-dms">
+<div class="gb"></div>
+<p class="st">Respuestas a DMs y Comentarios</p>
+<p class="ss">Respuestas jurídicamente precisas, orientadas a captar el cliente</p>
+<div class="card">
+  <div><label>Mensaje recibido</label><textarea id="dm-msg" placeholder="Pegá el comentario o DM. Ej: 'Me despidieron ayer, qué hago?'" rows="3" style="margin-bottom:9px"></textarea></div>
+  <div class="g2">
+    <div><label>Tipo</label><select id="dm-tipo"><option value="DM privado">DM privado</option><option value="comentario público">Comentario público</option><option value="derivación a consulta">Derivar a consulta</option></select></div>
+    <div><label>Tono</label><select id="dm-tono"><option value="cálido y profesional">Cálido y profesional</option><option value="directo y concreto">Directo</option><option value="empático">Empático</option></select></div>
+  </div>
+  <div style="text-align:right"><button class="bg" onclick="generarDM()"><i class="ti ti-message-circle"></i> Generar respuesta</button></div>
+</div>
+<div id="ld-dm" class="ld" style="display:none"><div class="dots"><span></span><span></span><span></span></div></div>
+<div class="rbx" id="dm-result" style="display:none"><div class="rl"><i class="ti ti-message-dots"></i> Respuesta generada</div><div class="rt" id="dm-rt"></div><div class="dv"></div><button class="cbtn" onclick="copEl('dm-rt')"><i class="ti ti-copy"></i> Copiar</button></div>
+<div style="margin-top:12px"><p style="font-size:11px;font-weight:700;color:var(--n);margin-bottom:8px">Consultas frecuentes:</p><div id="faq-r"></div></div>
+</div>
+
+<!-- PLANTILLAS -->
+<div class="panel" id="panel-plantillas">
+<div class="gb"></div>
+<p class="st">Plantillas Jurídicas</p>
+<p class="ss">Click para generar al instante</p>
+<input type="text" id="pl-search" placeholder="Buscar..." style="margin-bottom:10px" oninput="filtPl()">
+<div id="pl-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:7px"></div>
+</div>
+
+<!-- WHATSAPP -->
+<div class="panel" id="panel-whatsapp">
+<div class="gb"></div>
+<p class="st">Centro WhatsApp</p>
+<p class="ss">Estados y mensajes automatizados</p>
+<div class="wa-acc"><div class="wa-av"><i class="ti ti-brand-whatsapp"></i></div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--n)">Grupo RA — Principal</div><div style="font-size:10px;color:var(--mu)">WhatsApp Business</div></div></div>
+<div class="wa-acc"><div class="wa-av" style="background:#075E54"><i class="ti ti-user"></i></div><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--n)">Personal</div><div style="font-size:10px;color:var(--mu)">WhatsApp Personal</div></div></div>
+<div class="card" style="margin-top:10px">
+  <div class="g2">
+    <div><label>Tipo</label><select id="wa-tipo"><option value="estado de 24 horas">Estado (24hs)</option><option value="lista de difusión">Difusión</option><option value="respuesta automática">Respuesta auto</option></select></div>
+    <div><label>Tema</label><textarea id="wa-tema" placeholder="Consulta gratuita, recupero de expensas..." rows="2"></textarea></div>
+  </div>
+  <div style="text-align:right"><button class="bg" onclick="generarWA()"><i class="ti ti-brand-whatsapp"></i> Generar</button></div>
+</div>
+<div id="ld-wa" class="ld" style="display:none"><div class="dots"><span></span><span></span><span></span></div></div>
+<div class="rbx" id="wa-result" style="display:none"><div class="rl"><i class="ti ti-brand-whatsapp"></i> Mensaje generado</div><div class="rt" id="wa-rt"></div><div class="dv"></div><button class="cbtn" onclick="copEl('wa-rt')"><i class="ti ti-copy"></i> Copiar</button></div>
+</div>
+
+<!-- PRESCRIPCIONES -->
+<div class="panel" id="panel-prescripciones">
+<div class="gb"></div>
+<p class="st">Verificador de Prescripción</p>
+<p class="ss">Calculá si la acción judicial está vigente</p>
+<div class="card">
+  <div class="g2">
+    <div><label>Tipo de acción</label>
+    <select id="pr-tipo">
+      <option value="">Seleccioná...</option>
+      <optgroup label="Laboral"><option value="lab_desp">Despido / Indemnización</option><option value="lab_sal">Salarios impagos</option><option value="lab_acc">Accidente laboral (ART)</option></optgroup>
+      <optgroup label="Civil / Daños"><option value="civ_daños">Daños y perjuicios</option><option value="civ_transito">Accidente de tránsito</option><option value="civ_contrato">Incumplimiento contractual</option></optgroup>
+      <optgroup label="Cobranzas"><option value="cob_deuda">Deuda civil/comercial</option><option value="cob_cheque">Cheque rechazado</option><option value="cob_expensas">Expensas impagas</option><option value="cob_tarjeta">Tarjeta de crédito</option></optgroup>
+      <optgroup label="Familia"><option value="fam_ali">Alimentos atrasados</option><option value="fam_her">Acción hereditaria</option></optgroup>
+      <optgroup label="Consumidor"><option value="cons_rec">Reclamo consumidor</option></optgroup>
+      <optgroup label="Penal"><option value="pen_estafa">Estafa</option><option value="pen_lesiones">Lesiones</option></optgroup>
+    </select></div>
+    <div><label>Fecha del hecho</label><input type="date" id="pr-fecha"></div>
+  </div>
+  <div><label>Observaciones</label><textarea id="pr-obs" placeholder="CD enviada, acuerdo parcial, etc..." rows="2"></textarea></div>
+  <div style="text-align:right;margin-top:8px"><button class="bg" onclick="calcPrescripcion()"><i class="ti ti-clock-check"></i> Verificar</button></div>
+</div>
+<div id="ld-pr" class="ld" style="display:none"><div class="dots"><span></span><span></span><span></span></div></div>
+<div id="pr-result" style="display:none"></div>
+</div>
+
+<!-- CONFIG -->
+<div class="panel" id="panel-config">
+<div class="gb"></div>
+<p class="st">Configuración</p>
+<p class="ss">URL del Cloudflare Worker · Datos del estudio</p>
+<div class="cfg-banner">
+  <h3><i class="ti ti-cloud"></i> URL del Cloudflare Worker</h3>
+  <p>Pegá acá la URL de tu Worker (termina en <strong style="color:var(--gl)">.workers.dev</strong>). La encontrás en dash.cloudflare.com → Workers &amp; Pages → tu worker.</p>
+  <div class="cfg-row">
+    <input type="text" class="cfg-input" id="worker-url-input" placeholder="https://grupo-ra-worker.tu-usuario.workers.dev">
+    <button class="cfg-save" onclick="saveWorkerUrl()">Guardar</button>
+  </div>
+  <div class="cfg-status" id="cfg-status">
+    <span class="sd sd-a"></span><span style="color:rgba(255,255,255,.6);font-size:10px">Sin configurar</span>
+  </div>
+</div>
+<div class="card">
+  <p style="font-size:12px;font-weight:600;color:var(--n);margin-bottom:8px">Datos del estudio</p>
+  <div class="g2">
+    <div><label>Nombre</label><input type="text" id="cfg-nombre" value="Grupo RA - Raffo &amp; Asociados"></div>
+    <div><label>Instagram</label><input type="text" id="cfg-ig" value="@estudio_grupora"></div>
+  </div>
+  <div class="g2">
+    <div><label>WhatsApp</label><input type="text" id="cfg-wa" placeholder="+54 11 XXXX-XXXX"></div>
+    <div><label>Web</label><input type="text" id="cfg-web" value="grupora-raffoyasociados.netlify.app"></div>
+  </div>
+  <div style="text-align:right;margin-top:8px"><button class="bg" onclick="saveConfig()"><i class="ti ti-check"></i> Guardar datos</button></div>
+</div>
+</div>
+
+<!-- HISTORIAL -->
+<div class="panel" id="panel-historial">
+<div class="gb"></div>
+<p class="st">Historial</p>
+<p class="ss">Contenido generado en esta sesión</p>
+<div class="stat-r">
+  <div class="sc2"><div class="sn" id="s-gen">0</div><div class="sl">Generados</div></div>
+  <div class="sc2"><div class="sn" id="s-cop">0</div><div class="sl">Copiados</div></div>
+  <div class="sc2"><div class="sn" id="s-ar">0</div><div class="sl">Áreas</div></div>
+</div>
+<div id="hist-list"><p style="font-size:11px;color:var(--mu);text-align:center;padding:18px">Todavía no generaste contenido.</p></div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+// STATE
+let tipSel='consejo', tonSel='profesional y cercano', modeAct='est';
+let hist=[], cops=0, areasU=new Set(), calQueue=[];
+let lastTxt='', lastCap='';
+let WORKER_URL = localStorage.getItem('ra_worker_url') || '';
+let CFG = { nombre:'Grupo RA - Raffo & Asociados', ig:'@estudio_grupora', wa:'', web:'grupora-raffoyasociados.netlify.app' };
+
+// WORKER URL
+function saveWorkerUrl(){
+  const k = document.getElementById('worker-url-input').value.trim();
+  if(!k){ alert('Ingresá la URL del Worker.'); return; }
+  localStorage.setItem('ra_worker_url', k);
+  WORKER_URL = k;
+  updateCfgStatus(true);
+  alert('✅ URL guardada. ¡Ya podés usar la app!');
+}
+function updateCfgStatus(ok){
+  const el = document.getElementById('cfg-status');
+  if(!el) return;
+  el.innerHTML = ok
+    ? '<span class="sd sd-g"></span><span style="color:#86efac;font-size:10px">✓ Worker configurado — app lista</span>'
+    : '<span class="sd sd-a"></span><span style="color:rgba(255,255,255,.6);font-size:10px">Sin configurar</span>';
+}
+
+// AI CALL
+async function callGemini(prompt){
+  if(!WORKER_URL){ nav('config'); throw new Error('Configurá la URL del Worker en ⚙️ Config.'); }
+  let res;
+  try{
+    res = await fetch(WORKER_URL, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ prompt })
+    });
+  }catch(e){ throw new Error('Error de conexión. Verificá tu internet.'); }
+  let data;
+  try{ data = await res.json(); }catch(e){ throw new Error('Respuesta inválida.'); }
+  if(!res.ok) throw new Error(data?.error || 'Error '+res.status);
+  if(data?.text && data.text.trim()) return data.text.trim();
+  throw new Error('Respuesta vacía. Intentá de nuevo.');
+}
+
+function showErr(el, msg){
+  el.style.display='block';
+  el.innerHTML=`<div style="color:#c0392b;font-size:12px;padding:10px;background:#fdf0ef;border-radius:7px;border:1px solid #fcc">⚠️ ${msg}</div>`;
+}
+
+// NORM MAP
+const normMap={
+  laboral:{n:'LCT Ley 20.744, arts. 231-247',a:['Art.245 LCT — Indemnización','Art.231 — Preaviso']},
+  familia:{n:'CCyCN Ley 26.994 arts. 401-723',a:['Art.437 — Divorcio','Art.630 — Alimentos']},
+  civil:{n:'CCyCN arts. 1716-1780',a:['Art.1716 — Deber de reparar','Art.1740 — Reparación plena']},
+  consumidor:{n:'Ley 24.240 y mod.',a:['Art.10bis — Incumplimiento','Art.52bis — Daño punitivo']},
+  accidentes:{n:'CCyCN arts. 1757,1769; Ley 24.449',a:['Art.1757 — Actividad riesgosa','Art.1769 — Accidentes tránsito']},
+  art:{n:'LRT Ley 24.557 y mod. Ley 26.773',a:['Art.6 LRT — Contingencias','Art.14 — Prestaciones dinerarias']},
+  cobranzas:{n:'CCyCN arts. 724-956; CPCC',a:['Art.886 — Mora','Art.2561 — Prescripción']},
+  expensas:{n:'Ley 13.512; CPCC arts. 499-ss.',a:['Art.8 Ley 13.512 — Obligación expensas']},
+  inpi:{n:'Ley 22.362 (Marcas)',a:['Art.1 — Marcas registrables','Art.5 — Exclusividad']},
+  morosidad:{n:'CCyCN arts. 886-889 (mora)',a:['Art.886 — Mora automática']},
+  negociacion:{n:'CCyCN arts.1641-1648; Ley 24.573',a:['Art.1641 — Transacción']},
+  penal:{n:'Código Penal arts. 89,172,183',a:['Art.172 CP — Estafa','Art.89 CP — Lesiones']},
+  genero:{n:'Ley 26.485; Ley 27.499',a:['Art.5 — Tipos de violencia','Art.26 — Medidas urgentes']},
+  inquilinos:{n:'CCyCN arts.1187-1226; Ley 27.551',a:['Art.1196 — Destino','Art.1221 — Rescisión']},
+  sucesiones:{n:'CCyCN Libro Quinto arts. 2277-2531',a:['Art.2280 — Apertura sucesión','Art.2325 — Herederos forzosos']},
+  contratos:{n:'CCyCN arts. 957-1279',a:['Art.961 — Buena fe']},
+  daños:{n:'CCyCN arts. 1708-1780',a:['Art.1737 — Daño resarcible','Art.1740 — Reparación plena']},
+  administrativo:{n:'Ley 19.549; Ley 25.164',a:['Art.23 — Revisión judicial']},
+};
+
+const prescData={
+  lab_desp:{p:2,n:'Art. 256 LCT',desc:'Prescripción laboral — 2 años'},
+  lab_sal:{p:2,n:'Art. 256 LCT',desc:'Salarios impagos — 2 años'},
+  lab_acc:{p:2,n:'Art. 44 LRT',desc:'Accidente laboral — 2 años'},
+  civ_daños:{p:3,n:'Art. 2561 CCyCN',desc:'Daños y perjuicios — 3 años'},
+  civ_transito:{p:3,n:'Art. 2561 CCyCN',desc:'Accidente de tránsito — 3 años'},
+  civ_contrato:{p:5,n:'Art. 2560 CCyCN',desc:'Incumplimiento contractual — 5 años'},
+  cons_rec:{p:3,n:'Art. 50 Ley 24.240',desc:'Reclamo consumidor — 3 años'},
+  cons_garantia:{p:3,n:'Art. 50 Ley 24.240',desc:'Garantía — 3 años'},
+  cob_deuda:{p:5,n:'Art. 2560 CCyCN',desc:'Deuda civil/comercial — 5 años'},
+  cob_cheque:{p:1,n:'Art. 61 Ley 24.452',desc:'Cheque rechazado — 1 año'},
+  cob_expensas:{p:5,n:'Art. 2560 CCyCN',desc:'Expensas impagas — 5 años'},
+  cob_tarjeta:{p:3,n:'Art. 47 Ley 25.065',desc:'Tarjeta de crédito — 3 años'},
+  fam_ali:{p:5,n:'Art. 2562 inc.c CCyCN',desc:'Alimentos atrasados — 5 años'},
+  fam_her:{p:10,n:'Art. 2459 CCyCN',desc:'Acción hereditaria — 10 años'},
+  pen_estafa:{p:6,n:'Art. 62 CP',desc:'Estafa — 6 años'},
+  pen_lesiones:{p:3,n:'Art. 62 CP',desc:'Lesiones — 3 años'},
+};
+
+const plData=[
+  {t:'Despido sin causa',a:'laboral',d:'Indemnización art. 245 LCT',n:'Art. 245 LCT',i:'ti-briefcase'},
+  {t:'Accidente de tránsito',a:'accidentes',d:'Responsabilidad objetiva',n:'Art. 1769 CCyCN',i:'ti-car'},
+  {t:'Defensa del consumidor',a:'consumidor',d:'Reclamos por servicio defectuoso',n:'Ley 24.240',i:'ti-shield'},
+  {t:'Divorcio vincular',a:'familia',d:'Proceso exprés, convenio regulador',n:'Art. 437 CCyCN',i:'ti-heart-broken'},
+  {t:'Cuota alimentaria',a:'familia',d:'Fijación y actualización de alimentos',n:'Art. 630 CCyCN',i:'ti-coin'},
+  {t:'Violencia de género',a:'genero',d:'Medidas cautelares urgentes',n:'Ley 26.485',i:'ti-alert-triangle'},
+  {t:'Herencias y sucesiones',a:'sucesiones',d:'Declaratoria y porción legítima',n:'Art. 2325 CCyCN',i:'ti-building-community'},
+  {t:'Alquiler / locación',a:'inquilinos',d:'Derechos del inquilino',n:'Ley 27.551',i:'ti-home'},
+  {t:'ART / accidente laboral',a:'art',d:'Prestaciones LRT y reclamo civil',n:'Ley 24.557 / 26.773',i:'ti-first-aid-kit'},
+  {t:'Registro de marca INPI',a:'inpi',d:'Proceso y exclusividad de marca',n:'Ley 22.362',i:'ti-certificate'},
+  {t:'Ejecución de expensas',a:'expensas',d:'Cobro judicial de expensas',n:'Ley 13.512 / CPCC',i:'ti-building'},
+  {t:'Recupero de deudas',a:'cobranzas',d:'Gestión extrajudicial y judicial',n:'CCyCN / CPCC',i:'ti-receipt'},
+  {t:'Estafa y fraude',a:'penal',d:'Denuncia y medidas cautelares',n:'Art. 172 CP',i:'ti-lock'},
+  {t:'Control de morosidad',a:'morosidad',d:'Seguimiento y ejecución de deudores',n:'CPCC / CCyCN',i:'ti-chart-bar'},
+  {t:'Daños y perjuicios',a:'daños',d:'Reparación plena e integral',n:'Art. 1740 CCyCN',i:'ti-alert-circle'},
+  {t:'Tenencia / cuidado parental',a:'familia',d:'Responsabilidad parental compartida',n:'Art. 641 CCyCN',i:'ti-users'},
+];
+
+const faqR=[
+  {q:'Me despidieron ayer, ¿qué puedo hacer?'},
+  {q:'¿Cuánto vale la indemnización por despido?'},
+  {q:'Mi ART no me atiende, ¿puedo demandar?'},
+  {q:'¿Me pueden cobrar expensas con intereses?'},
+  {q:'¿Cómo registro mi marca en el INPI?'},
+  {q:'¿La deuda prescribió si pasaron 3 años?'},
+  {q:'Me robaron en la vía pública, ¿qué hago?'},
+  {q:'¿Puedo pedir alimentos si no estamos casados?'},
+];
+
+const modeLabels={est:'Estudio Jurídico',art:'ART · Accidentes Laborales',cob:'Estudio de Cobranzas',inpi:'Registro de Marcas · INPI'};
+
+function nav(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sb-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  const sb=document.getElementById('sb-'+id);
+  if(sb) sb.classList.add('active');
+}
+
+function setMode(m,btn){
+  modeAct=m;
+  document.querySelectorAll('.mt-btn').forEach(b=>b.className='mt-btn off');
+  btn.className='mt-btn on';
+  document.getElementById('gen-title').textContent='Generador · '+modeLabels[m];
+  const areaMap={art:'art',cob:'cobranzas',inpi:'inpi'};
+  if(areaMap[m]) document.getElementById('area-sel').value=areaMap[m];
+}
+
+function setTp(el,v){ tipSel=v; document.querySelectorAll('.tp').forEach(b=>b.classList.remove('a')); el.classList.add('a'); }
+function setTn(el,v){ tonSel=v; document.querySelectorAll('.tnb').forEach(b=>b.classList.remove('s')); el.classList.add('s'); }
+
+function buildPrompt(area,red,tipo,tema,normEx){
+  const ni=normMap[area]||{n:'CCyCN y legislación argentina vigente',a:[]};
+  const nRef=normEx||ni.n;
+  const modeCtx={est:'',art:' — especialidad en ART (Ley 24.557 y Ley 26.773)',cob:' — Estudio de Cobranzas: recupero de deudas, ejecución de expensas, control de morosidad',inpi:' — Registro de Marcas ante el INPI (Ley 22.362)'};
+  const redDesc={instagram:'Instagram caption (150-250 palabras, gancho inicial potente, emojis elegantes, CTA, hasta 25 hashtags)',ig_edu:'Instagram educativo (tono didáctico, estructura clara)',linkedin:'LinkedIn profesional (200-300 palabras)',whatsapp:'Estado de WhatsApp (máximo 60 palabras, impacto inmediato)',facebook:'Facebook (conversacional, 100-200 palabras)',twitter:'Hilo de Twitter/X (5-7 tweets numerados, máx 280 chars c/u)'};
+  const tipoDesc={consejo:'consejo legal práctico',derechos:'publicación sobre derechos del ciudadano',mito:'desmintiendo un mito legal común',caso:'caso práctico con situación real',cta:'publicación de captación de clientes',dato:'dato impactante del área jurídica',proceso:'paso a paso procesual'};
+  return `Sos el generador de contenido del Estudio "${CFG.nombre}" (${CFG.ig})${modeCtx[modeAct]||''}, Argentina, consultas online para todo el país.
+Generá una pieza del tipo "${tipoDesc[tipo]||tipo}" para ${redDesc[red]||red} sobre "${area}"${tema?', tema: "'+tema+'"':''}.
+Normativa: ${nRef}${ni.a.length?'. Artículos: '+ni.a.join(', '):''}
+Reglas: preciso según derecho argentino vigente 2025, citar 1-2 artículos naturalmente, no prometer resultados, tono ${tonSel} elegante y sofisticado, mencionar ${CFG.ig}, lenguaje accesible.
+Formato exacto sin explicaciones:
+[CAPTION]
+(texto completo)
+[NORMATIVA_CITADA]
+(leyes/artículos en 1 línea)
+[DISCLAIMER]
+(aviso legal en 1 oración)`;
+}
+
+async function generarUno(){
+  const area=document.getElementById('area-sel').value;
+  const red=document.getElementById('red-sel').value;
+  const tema=document.getElementById('tema-in').value;
+  const normEx=document.getElementById('norm-ex').value;
+  const disc=document.getElementById('chk-disc').checked;
+  if(!area){ document.getElementById('area-sel').style.borderColor='var(--g)'; document.getElementById('area-sel').focus(); return; }
+  document.getElementById('rbx-gen').style.display='none';
+  document.getElementById('multi-results').style.display='none';
+  document.getElementById('ld-gen').style.display='block';
+  try{
+    const raw=await callGemini(buildPrompt(area,red,tipSel,tema,normEx));
+    showResultGen(raw,area,red,disc);
+  }catch(e){
+    document.getElementById('ld-gen').style.display='none';
+    const rb=document.getElementById('rbx-gen'); rb.style.display='block';
+    showErr(rb,e.message);
+  }
+}
+
+function showResultGen(raw,area,red,disc){
+  const cap=(raw.match(/\[CAPTION\]([\s\S]*?)(?=\[NORMATIVA_CITADA\]|\[DISCLAIMER\]|$)/)||['',''])[1].trim();
+  const nc=(raw.match(/\[NORMATIVA_CITADA\]([\s\S]*?)(?=\[DISCLAIMER\]|$)/)||['',''])[1].trim();
+  const ds=(raw.match(/\[DISCLAIMER\]([\s\S]*?)$/)||['',''])[1].trim();
+  lastCap=cap||raw; lastTxt=lastCap+(nc?'
+
+⚖️ '+nc:'')+(ds&&disc?'
+
+'+ds:'');
+  document.getElementById('ld-gen').style.display='none';
+  const rb=document.getElementById('rbx-gen'); rb.style.display='block';
+  document.getElementById('rt-txt').textContent=lastCap;
+  const ncb=document.getElementById('nc-box');
+  nc?(ncb.style.display='block',ncb.innerHTML='<strong>⚖️ Base normativa:</strong> '+nc):(ncb.style.display='none');
+  const dcb=document.getElementById('dc-box');
+  (ds&&disc)?(dcb.style.display='block',dcb.innerHTML='📋 '+ds):(dcb.style.display='none');
+  document.getElementById('cc').textContent=lastCap.length+' caracteres';
+  const rn={instagram:'📸 IG',ig_edu:'📸 IG Edu',linkedin:'💼 LI',whatsapp:'💬 WA',facebook:'👥 FB',twitter:'🐦 TW'};
+  document.getElementById('pl-tag').innerHTML=`<span style="background:var(--n);color:var(--gp);font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px">${rn[red]||red}</span>`;
+  document.getElementById('rl-txt').textContent=tipSel;
+  if(document.getElementById('chk-queue').checked) addToQueue();
+  hist.unshift({area,red,tipo:tipSel,texto:lastCap,fecha:new Date()});
+  areasU.add(area); updStats(); rendHist();
+}
+
+async function generar3(){
+  const area=document.getElementById('area-sel').value;
+  const red=document.getElementById('red-sel').value;
+  const tema=document.getElementById('tema-in').value;
+  const normEx=document.getElementById('norm-ex').value;
+  if(!area){ document.getElementById('area-sel').focus(); return; }
+  document.getElementById('rbx-gen').style.display='none';
+  document.getElementById('multi-results').style.display='none';
+  document.getElementById('ld-gen').style.display='block';
+  const tipos=['consejo','mito','cta'];
+  const nombres={'consejo':'💡 Consejo Legal','mito':'❌ Mito vs Realidad','cta':'📞 Captación'};
+  try{
+    const results=await Promise.all(tipos.map(tp=>callGemini(buildPrompt(area,red,tp,tema,normEx))));
+    document.getElementById('ld-gen').style.display='none';
+    const mr=document.getElementById('multi-results'); mr.style.display='block';
+    mr.innerHTML=results.map((raw,i)=>{
+      const cap=(raw.match(/\[CAPTION\]([\s\S]*?)(?=\[NORMATIVA_CITADA\]|\[DISCLAIMER\]|$)/)||['',''])[1].trim()||raw;
+      const nc=(raw.match(/\[NORMATIVA_CITADA\]([\s\S]*?)(?=\[DISCLAIMER\]|$)/)||['',''])[1].trim();
+      const id='mv'+i;
+      return `<div class="multi-ver"><div class="ver-label"><i class="ti ti-file"></i> Versión ${i+1}: ${nombres[tipos[i]]}</div><div class="rt" id="${id}" style="font-size:12px">${cap}</div>${nc?`<div class="ncite"><strong>⚖️</strong> ${nc}</div>`:''}<div class="dv"></div><button class="cbtn" onclick="copEl('${id}')"><i class="ti ti-copy"></i> Copiar</button></div>`;
+    }).join('');
+    hist.unshift({area,red,tipo:'3 versiones',texto:results[0].substring(0,80),fecha:new Date()});
+    areasU.add(area); updStats(); rendHist();
+  }catch(e){
+    document.getElementById('ld-gen').style.display='none';
+    const mr=document.getElementById('multi-results'); mr.style.display='block';
+    showErr(mr,e.message);
+  }
+}
+
+function addToQueue(){
+  if(!lastCap) return;
+  const horarios=['08:00','12:30','19:00','21:30'];
+  const red=document.getElementById('red-sel').value;
+  calQueue.push({hora:horarios[calQueue.length%4],texto:lastCap,red,status:'pendiente'});
+  rendQueue();
+}
+
+function rendQueue(){
+  const ci=document.getElementById('cal-items'); if(!ci) return;
+  document.getElementById('cal-queue').style.display='block';
+  const rn={instagram:'📸 IG',ig_edu:'📸 IG',linkedin:'💼 LI',whatsapp:'💬 WA',facebook:'👥 FB',twitter:'🐦 TW'};
+  ci.innerHTML=calQueue.map((q,i)=>`
+    <div class="queue-item">
+      <div class="qi-time">${q.hora}<br><span style="font-size:8px">${rn[q.red]||q.red}</span></div>
+      <div class="qi-text">${q.texto.substring(0,120)}...<div class="qi-net"><span class="status-dot ${q.status==='publicado'?'sd-g':'sd-a'}"></span> ${q.status==='publicado'?'Publicado':'Listo'}</div></div>
+      <div class="qi-actions">
+        <button class="pub-btn" onclick="publicarItem(${i})">✓ Publicar</button>
+        <button class="del-btn" onclick="calQueue.splice(${i},1);rendQueue()">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+function publicarItem(i){
+  calQueue[i].status='publicado'; rendQueue();
+  alert('✅ Aprobá la publicación en tu celular.');
+}
+
+async function generarCalendario(){
+  const area=document.getElementById('cal-area').value;
+  const qty=parseInt(document.getElementById('cal-qty').value);
+  document.getElementById('ld-cal').style.display='block';
+  document.getElementById('cal-queue').style.display='none';
+  const horarios=['08:00','12:30','19:00','21:30','08:00','12:30','19:00'];
+  const tipos=['consejo','derechos','mito','caso','cta','dato','proceso'];
+  const redes=['instagram','ig_edu','linkedin','whatsapp','instagram','ig_edu','linkedin'];
+  try{
+    calQueue=[];
+    for(let i=0;i<qty;i++){
+      const raw=await callGemini(buildPrompt(area,redes[i],tipos[i%tipos.length],'',''));
+      const cap=(raw.match(/\[CAPTION\]([\s\S]*?)(?=\[NORMATIVA_CITADA\]|\[DISCLAIMER\]|$)/)||['',''])[1].trim()||raw.substring(0,200);
+      calQueue.push({hora:horarios[i],texto:cap,red:redes[i],status:'pendiente'});
+    }
+    document.getElementById('ld-cal').style.display='none';
+    rendQueue();
+  }catch(e){
+    document.getElementById('ld-cal').style.display='none';
+    alert('Error: '+e.message);
+  }
+}
+
+async function generarReel(){
+  const tema=document.getElementById('reel-tema').value;
+  const fmt=document.getElementById('reel-fmt').value;
+  const dur=document.getElementById('reel-dur').value;
+  if(!tema.trim()){ document.getElementById('reel-tema').focus(); return; }
+  document.getElementById('ld-reel').style.display='block';
+  document.getElementById('reel-result').style.display='none';
+  const prompt=`Guión Reel de ${dur}s, formato "${fmt}", tema: "${tema}". Estudio "${CFG.nombre}" (${CFG.ig}), Argentina.
+Formato: [SLIDE_N] ⏱️ Xs-Ys | TITULO\nTexto: "..."\nVoz: "..."
+Último slide CTA: "Consultanos → ${CFG.ig}"
+[HASHTAGS] 20 hashtags Argentina
+[DESCRIPCION_POST] caption 100-150 palabras`;
+  try{
+    const raw=await callGemini(prompt);
+    document.getElementById('ld-reel').style.display='none';
+    const rr=document.getElementById('reel-result'); rr.style.display='block';
+    const slides=raw.split(/\[SLIDE[_\s]?\w*\]/).filter(s=>s.trim());
+    rr.innerHTML=slides.map((s,i)=>`<div class="reel-slide"><div class="reel-num">SLIDE ${i+1}</div><div class="reel-text">${s.trim().replace(/
+/g,'<br>')}</div></div>`).join('');
+    const ht=(raw.match(/\[HASHTAGS\]([\s\S]*?)(?=\[DESCRIPCION_POST\]|$)/)||['',''])[1].trim();
+    const dp=(raw.match(/\[DESCRIPCION_POST\]([\s\S]*?)$/)||['',''])[1].trim();
+    if(ht) rr.innerHTML+=`<div class="rbx" style="margin-top:8px"><div class="rl"><i class="ti ti-hash"></i> Hashtags</div><div class="rt" id="reel-ht" style="font-size:11px">${ht}</div><div class="dv"></div><button class="cbtn" onclick="copEl('reel-ht')"><i class="ti ti-copy"></i> Copiar</button></div>`;
+    if(dp) rr.innerHTML+=`<div class="rbx" style="margin-top:8px"><div class="rl"><i class="ti ti-file-text"></i> Caption</div><div class="rt" id="reel-dp" style="font-size:11px">${dp}</div><div class="dv"></div><button class="cbtn" onclick="copEl('reel-dp')"><i class="ti ti-copy"></i> Copiar</button></div>`;
+  }catch(e){
+    document.getElementById('ld-reel').style.display='none';
+    const rr=document.getElementById('reel-result'); rr.style.display='block';
+    showErr(rr,e.message);
+  }
+}
+
+async function generarPromptImagen(){
+  const tema=document.getElementById('img-tema').value;
+  const tipo=document.getElementById('img-tipo').value;
+  const estilo=document.getElementById('img-estilo').value;
+  if(!tema.trim()){ document.getElementById('img-tema').focus(); return; }
+  const prompt=`Prompt para IA de imágenes (Midjourney/DALL-E/Canva AI) para "${CFG.nombre}". Tipo: ${tipo}, Estilo: ${estilo}, Concepto: ${tema}. Paleta: azul marino #0D2347, dorado #C9A84C. Devolvé: 1) Prompt en inglés 2) Descripción en español 3) Configuraciones sugeridas.`;
+  const ir=document.getElementById('img-result'); ir.style.display='block';
+  ir.innerHTML='<div class="ld"><div class="dots"><span></span><span></span><span></span></div></div>';
+  try{
+    const raw=await callGemini(prompt);
+    ir.innerHTML=`<div class="img-prompt-box"><h4><i class="ti ti-wand"></i> Prompt para IA de imágenes</h4><div class="img-prompt-text" id="img-pt">${raw}</div><div style="margin-top:10px"><button class="cbtn" style="color:var(--gl);border-color:rgba(201,168,76,.3)" onclick="copEl('img-pt')"><i class="ti ti-copy"></i> Copiar</button></div></div>`;
+  }catch(e){ showErr(ir,e.message); }
+}
+
+async function generarCarrusel(){
+  const tema=document.getElementById('carr-tema').value;
+  const slides=document.getElementById('carr-slides').value;
+  const red=document.getElementById('carr-red').value;
+  if(!tema.trim()){ document.getElementById('carr-tema').focus(); return; }
+  document.getElementById('ld-carr').style.display='block';
+  document.getElementById('carr-result').style.display='none';
+  const prompt=`Carrusel de ${slides} slides para ${red}, tema: "${tema}". Estudio "${CFG.nombre}" (${CFG.ig}), Argentina. Normativa vigente donde aplique.
+Formato: [SLIDE_N]\nTÍTULO: (máx 8 palabras)\nCUERPO: (2-4 líneas)\nVISUAL: (descripción diseño azul marino/dorado)
+Slide 1: portada. Último slide: CTA "Consultanos → ${CFG.ig}"
+[CAPTION_POST] caption 100-200 palabras con hashtags`;
+  try{
+    const raw=await callGemini(prompt);
+    document.getElementById('ld-carr').style.display='none';
+    const cr=document.getElementById('carr-result'); cr.style.display='block';
+    const cap=(raw.match(/\[CAPTION_POST\]([\s\S]*?)$/)||['',''])[1].trim();
+    const slidesRaw=raw.replace(/\[CAPTION_POST\][\s\S]*$/,'').split(/\[SLIDE_\d+\]/).filter(s=>s.trim());
+    cr.innerHTML=slidesRaw.map((s,i)=>{
+      const lines=s.trim().split('
+');
+      const tit=(lines.find(l=>l.startsWith('TÍTULO:'))||lines[0]||'').replace('TÍTULO:','').trim();
+      const bod=(lines.find(l=>l.startsWith('CUERPO:'))||lines[1]||'').replace('CUERPO:','').trim();
+      const vis=(lines.find(l=>l.startsWith('VISUAL:'))||'').replace('VISUAL:','').trim();
+      return `<div class="carr-slide"><div class="carr-num">SLIDE ${i+1}</div><div class="carr-title">${tit}</div><div class="carr-body">${bod}</div>${vis?`<div style="font-size:9px;color:var(--g);margin-top:4px">🎨 ${vis}</div>`:''}</div>`;
+    }).join('');
+    if(cap) cr.innerHTML+=`<div class="rbx" style="margin-top:8px"><div class="rl"><i class="ti ti-file-text"></i> Caption</div><div class="rt" id="carr-cap" style="font-size:11px">${cap}</div><div class="dv"></div><button class="cbtn" onclick="copEl('carr-cap')"><i class="ti ti-copy"></i> Copiar</button></div>`;
+  }catch(e){
+    document.getElementById('ld-carr').style.display='none';
+    const cr=document.getElementById('carr-result'); cr.style.display='block';
+    showErr(cr,e.message);
+  }
+}
+
+async function generarDM(){
+  const msg=document.getElementById('dm-msg').value;
+  const tipo=document.getElementById('dm-tipo').value;
+  const tono=document.getElementById('dm-tono').value;
+  if(!msg.trim()){ document.getElementById('dm-msg').focus(); return; }
+  document.getElementById('dm-result').style.display='none';
+  document.getElementById('ld-dm').style.display='block';
+  const prompt=`Respondé este mensaje de redes sociales como community manager jurídico de "${CFG.nombre}" (${CFG.ig}), Argentina. Tipo: "${tipo}", Tono: "${tono}". Mensaje: "${msg}". No prometer resultados. Cerrar con referencia a ${CFG.ig}. Solo el texto listo para enviar.`;
+  try{
+    const raw=await callGemini(prompt);
+    document.getElementById('ld-dm').style.display='none';
+    document.getElementById('dm-result').style.display='block';
+    document.getElementById('dm-rt').textContent=raw;
+  }catch(e){
+    document.getElementById('ld-dm').style.display='none';
+    const dr=document.getElementById('dm-result'); dr.style.display='block';
+    showErr(dr,e.message);
+  }
+}
+
+function rendFAQ(){
+  document.getElementById('faq-rapidas').innerHTML=faqR.map(f=>`
+    <div style="background:var(--w);border:1px solid var(--bd);border-radius:7px;padding:9px 11px;margin-bottom:6px;display:flex;align-items:center;gap:8px;cursor:pointer" onclick="usarFAQ('${f.q.replace(/'/g,"\'")}')">
+      <i class="ti ti-question-mark" style="color:var(--g);font-size:14px;flex-shrink:0"></i>
+      <span style="font-size:11px;color:var(--n);flex:1">${f.q}</span>
+      <button class="cbtn">Usar</button>
+    </div>`).join('');
+}
+function usarFAQ(q){ document.getElementById('dm-msg').value=q; generarDM(); }
+
+async function generarWA(){
+  const dest=document.getElementById('wa-dest').value;
+  const tipo=document.getElementById('wa-tipo').value;
+  const tema=document.getElementById('wa-tema').value;
+  document.getElementById('wa-result').style.display='none';
+  document.getElementById('ld-wa').style.display='block';
+  const prompt=`Mensaje de WhatsApp tipo "${tipo}" para cuenta "${dest}" del Estudio "${CFG.nombre}" (${CFG.ig}). Tema: "${tema||'servicios jurídicos, consultas online toda Argentina'}". ${tipo==='estado de 24 horas'?'Máximo 60 palabras, impacto inmediato.':tipo==='lista de difusión'?'Máximo 120 palabras, CTA claro.':'Protocolar pero cálido, indicar horario de atención.'} Solo el texto listo para WhatsApp.`;
+  try{
+    const raw=await callGemini(prompt);
+    document.getElementById('ld-wa').style.display='none';
+    document.getElementById('wa-result').style.display='block';
+    document.getElementById('wa-rt').textContent=raw;
+  }catch(e){
+    document.getElementById('ld-wa').style.display='none';
+    const wr=document.getElementById('wa-result'); wr.style.display='block';
+    showErr(wr,e.message);
+  }
+}
+
+async function calcPrescripcion(){
+  const tipo=document.getElementById('pr-tipo').value;
+  const fecha=document.getElementById('pr-fecha').value;
+  const obs=document.getElementById('pr-obs').value;
+  if(!tipo||!fecha){ alert('Completá tipo y fecha.'); return; }
+  document.getElementById('ld-pr').style.display='block';
+  document.getElementById('pr-result').style.display='none';
+  const pd=prescData[tipo];
+  if(pd){
+    const fechaH=new Date(fecha+'T12:00:00');
+    const hoy=new Date();
+    const diffDias=Math.floor((hoy-fechaH)/(1000*60*60*24));
+    const prescDias=pd.p*365;
+    const restantes=prescDias-diffDias;
+    const estado=restantes>180?'ok':restantes>0?'warn':'danger';
+    const colorClass={ok:'presc-green',warn:'presc-amber',danger:'presc-red'}[estado];
+    const msg=restantes>0?`Quedan aproximadamente <strong>${Math.round(restantes)} días</strong> (${Math.floor(restantes/30)} meses).`:`⚠️ Venció hace <strong>${Math.abs(Math.round(restantes))} días</strong>. Verificar causales de suspensión urgente.`;
+    document.getElementById('ld-pr').style.display='none';
+    const pr=document.getElementById('pr-result'); pr.style.display='block';
+    pr.innerHTML=`<div class="presc-result presc-${estado}"><p style="font-size:11px;color:var(--mu);margin-bottom:4px">${pd.desc}</p><div class="presc-days ${colorClass}">${restantes>0?restantes+' días':'PRESCRIPTO'}</div><p style="font-size:12px;color:var(--n);margin-bottom:8px;line-height:1.5">${msg}</p><div class="ncite"><strong>⚖️</strong> ${pd.n} — ${pd.p} año${pd.p!==1?'s':''}</div>${obs?`<div style="margin-top:7px;font-size:10px;color:var(--mu)">${obs}</div>`:''}<div style="margin-top:9px;font-size:10px;color:var(--mu);font-style:italic">⚠️ Cálculo orientativo. Verificar siempre con el expediente completo.</div></div>`;
+    return;
+  }
+  try{
+    const raw=await callGemini(`Prescripción de acción "${tipo}", hecho: ${fecha}, hoy: ${new Date().toLocaleDateString('es-AR')}, obs: "${obs}". Plazo, vencimiento, estado, recomendación urgente. Derecho argentino vigente.`);
+    document.getElementById('ld-pr').style.display='none';
+    const pr=document.getElementById('pr-result'); pr.style.display='block';
+    pr.innerHTML=`<div class="presc-result"><div class="rl"><i class="ti ti-clock-check"></i> Análisis</div><div class="rt">${raw.replace(/
+/g,'<br>')}</div></div>`;
+  }catch(e){
+    document.getElementById('ld-pr').style.display='none';
+    const pr=document.getElementById('pr-result'); pr.style.display='block';
+    showErr(pr,e.message);
+  }
+}
+
+async function recrear(){
+  const msg=document.getElementById('rec-msg').value;
+  const tipo=document.getElementById('rec-tipo').value;
+  const fmt=document.getElementById('rec-fmt').value;
+  document.getElementById('rec-result').style.display='block';
+  document.getElementById('rec-rt').textContent='Generando...';
+  try{
+    const raw=await callGemini(`Recreá una pieza de tipo "${tipo}" en formato "${fmt}" con identidad de "${CFG.nombre}" (${CFG.ig}). Paleta azul marino #0D2347, dorado #C9A84C. Mensaje: "${msg||'asesoramiento jurídico online para toda Argentina'}". Solo el contenido.`);
+    document.getElementById('rec-rt').textContent=raw;
+  }catch(e){ document.getElementById('rec-rt').textContent='Error: '+e.message; }
+}
+
+function filtPl(){
+  const q=(document.getElementById('pl-search')||{}).value||'';
+  const ql=q.toLowerCase();
+  const f=ql?plData.filter(p=>p.t.toLowerCase().includes(ql)||p.a.includes(ql)||p.n.toLowerCase().includes(ql)):plData;
+  const el=document.getElementById('pl-grid');
+  if(!el) return;
+  el.innerHTML=f.map(p=>`<div class="pc" onclick="usarPl('${p.a}','${p.t.replace(/'/g,"\'")}')"><div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><i class="ti ${p.i}" style="color:var(--g);font-size:14px"></i><span class="pt">${p.t}</span></div><div class="pd">${p.d}</div><div class="pn"><i class="ti ti-scale" style="font-size:9px"></i> ${p.n}</div></div>`).join('');
+}
+function usarPl(a,t){ nav('generar'); document.getElementById('area-sel').value=a; document.getElementById('tema-in').value=t; setTimeout(()=>generarUno(),100); }
+
+function prevImg(inp){
+  if(inp.files&&inp.files[0]){
+    const r=new FileReader();
+    r.onload=e=>{ const i=document.getElementById('ip'); i.src=e.target.result; i.style.display='block'; document.getElementById('rec-opts').style.display='block'; };
+    r.readAsDataURL(inp.files[0]);
+  }
+}
+
+function copEl(id){
+  const el=document.getElementById(id);
+  if(!el) return;
+  navigator.clipboard.writeText(el.innerText||el.textContent).then(()=>{ cops++; updStats(); });
+}
+function copGen(){ navigator.clipboard.writeText(lastTxt).then(()=>{ cops++; updStats(); }); }
+
+function updStats(){
+  document.getElementById('s-gen').textContent=hist.length;
+  document.getElementById('s-cop').textContent=cops;
+  document.getElementById('s-ar').textContent=areasU.size;
+}
+function rendHist(){
+  const icons={laboral:'ti-briefcase',familia:'ti-heart',cobranzas:'ti-coin',penal:'ti-shield',civil:'ti-scale',consumidor:'ti-receipt',accidentes:'ti-car',art:'ti-first-aid-kit',inpi:'ti-certificate',expensas:'ti-building',morosidad:'ti-chart-bar',daños:'ti-alert-circle',genero:'ti-alert-triangle',inquilinos:'ti-home',sucesiones:'ti-building-community'};
+  const el=document.getElementById('hist-list');
+  if(!el) return;
+  el.innerHTML=hist.slice(0,15).map(h=>`<div class="hi"><div class="hic"><i class="ti ${icons[h.area]||'ti-file'}"></i></div><div><div class="htl">${h.tipo} · ${h.area}</div><div class="hpr">${(h.texto||'').substring(0,100)}...</div></div></div>`).join('');
+}
+
+function saveConfig(){
+  CFG.nombre=document.getElementById('cfg-nombre').value||CFG.nombre;
+  CFG.ig=document.getElementById('cfg-ig').value||CFG.ig;
+  CFG.wa=document.getElementById('cfg-wa').value||'';
+  CFG.web=document.getElementById('cfg-web').value||CFG.web;
+  localStorage.setItem('ra_config',JSON.stringify(CFG));
+  alert('✅ Configuración guardada.');
+}
+
+function loadConfig(){
+  const url=localStorage.getItem('ra_worker_url');
+  if(url){
+    WORKER_URL=url;
+    const inp=document.getElementById('worker-url-input');
+    if(inp) inp.value=url;
+    updateCfgStatus(true);
+  }
+  const c=localStorage.getItem('ra_config');
+  if(c){ try{ CFG=JSON.parse(c); document.getElementById('cfg-nombre').value=CFG.nombre; document.getElementById('cfg-ig').value=CFG.ig; if(CFG.wa) document.getElementById('cfg-wa').value=CFG.wa; document.getElementById('cfg-web').value=CFG.web; }catch(e){} }
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  loadConfig();
+  filtPl();
+  rendFAQ();
+  if(!WORKER_URL){
+    setTimeout(()=>{
+      const b=document.createElement('div');
+      b.style.cssText='position:fixed;bottom:16px;right:16px;background:var(--n);color:var(--gl);padding:12px 16px;border-radius:9px;font-size:11px;border:1px solid rgba(201,168,76,.4);cursor:pointer;z-index:9999;max-width:260px;line-height:1.5;box-shadow:0 4px 20px rgba(0,0,0,.3)';
+      b.innerHTML='<strong style="color:var(--g)">⚙️ Configuración pendiente</strong><br>Andá a Config. y pegá la URL de tu Cloudflare Worker.';
+      b.onclick=()=>{ nav('config'); document.body.removeChild(b); };
+      document.body.appendChild(b);
+      setTimeout(()=>{ if(b.parentNode) document.body.removeChild(b); },8000);
+    },1500);
+  }
+});
+
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/sw.js').catch(()=>{});
+}
+</script>
+</body>
+</html>
