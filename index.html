@@ -132,27 +132,27 @@ textarea{resize:vertical;min-height:64px;line-height:1.5}
     <p>Marketing Jurídico con IA</p>
   </div>
   <div class="mode-toggle">
-    <button class="mt-btn on" onclick='setMode("est",this)'>Estudio</button>
-    <button class="mt-btn off" onclick='setMode("art",this)'>ART</button>
-    <button class="mt-btn off" onclick='setMode("cob",this)'>Cobranzas</button>
-    <button class="mt-btn off" onclick='setMode("inpi",this)'>INPI</button>
+    <button class="mt-btn on" onclick="setMode('est',this)">Estudio</button>
+    <button class="mt-btn off" onclick="setMode('art',this)">ART</button>
+    <button class="mt-btn off" onclick="setMode('cob',this)">Cobranzas</button>
+    <button class="mt-btn off" onclick="setMode('inpi',this)">INPI</button>
   </div>
 </div>
 
 <div class="main-layout">
 <div class="sidebar">
-  <button class="sb-btn active" onclick='nav("generar")' id="sb-generar"><i class="ti ti-sparkles"></i><span>Crear</span></button>
-  <button class="sb-btn" onclick='nav("calendario")' id="sb-calendario"><i class="ti ti-calendar"></i><span>Agenda</span></button>
-  <button class="sb-btn" onclick='nav("reels")' id="sb-reels"><i class="ti ti-video"></i><span>Reels</span></button>
-  <button class="sb-btn" onclick='nav("carrusel")' id="sb-carrusel"><i class="ti ti-layout-columns"></i><span>Carrus.</span></button>
-  <button class="sb-btn" onclick='nav("dms")' id="sb-dms"><i class="ti ti-message-circle"></i><span>DMs</span></button>
+  <button class="sb-btn active" onclick="nav('generar')" id="sb-generar"><i class="ti ti-sparkles"></i><span>Crear</span></button>
+  <button class="sb-btn" onclick="nav('calendario')" id="sb-calendario"><i class="ti ti-calendar"></i><span>Agenda</span></button>
+  <button class="sb-btn" onclick="nav('reels')" id="sb-reels"><i class="ti ti-video"></i><span>Reels</span></button>
+  <button class="sb-btn" onclick="nav('carrusel')" id="sb-carrusel"><i class="ti ti-layout-columns"></i><span>Carrus.</span></button>
+  <button class="sb-btn" onclick="nav('dms')" id="sb-dms"><i class="ti ti-message-circle"></i><span>DMs</span></button>
   <div class="sb-sep"></div>
-  <button class="sb-btn" onclick='nav("plantillas")' id="sb-plantillas"><i class="ti ti-layout-grid"></i><span>Témpl.</span></button>
-  <button class="sb-btn" onclick='nav("whatsapp")' id="sb-whatsapp"><i class="ti ti-brand-whatsapp"></i><span>WA</span></button>
-  <button class="sb-btn" onclick='nav("prescripciones")' id="sb-prescripciones"><i class="ti ti-clock-check"></i><span>Presc.</span></button>
+  <button class="sb-btn" onclick="nav('plantillas')" id="sb-plantillas"><i class="ti ti-layout-grid"></i><span>Témpl.</span></button>
+  <button class="sb-btn" onclick="nav('whatsapp')" id="sb-whatsapp"><i class="ti ti-brand-whatsapp"></i><span>WA</span></button>
+  <button class="sb-btn" onclick="nav('prescripciones')" id="sb-prescripciones"><i class="ti ti-clock-check"></i><span>Presc.</span></button>
   <div class="sb-sep"></div>
-  <button class="sb-btn" onclick='nav("config")' id="sb-config"><i class="ti ti-settings"></i><span>Config.</span></button>
-  <button class="sb-btn" onclick='nav("historial")' id="sb-historial"><i class="ti ti-history"></i><span>Hist.</span></button>
+  <button class="sb-btn" onclick="nav('config')" id="sb-config"><i class="ti ti-settings"></i><span>Config.</span></button>
+  <button class="sb-btn" onclick="nav('historial')" id="sb-historial"><i class="ti ti-history"></i><span>Hist.</span></button>
 </div>
 
 <div class="content-area">
@@ -207,21 +207,21 @@ textarea{resize:vertical;min-height:64px;line-height:1.5}
   </div>
   <div style="margin-bottom:9px"><label>Tipo de pieza</label>
   <div class="tps">
-    <button class="tp a" onclick='setTp(this,"consejo")'>💡 Consejo</button>
-    <button class="tp" onclick='setTp(this,"derechos")'>⚖️ Derechos</button>
-    <button class="tp" onclick='setTp(this,"mito")'>❌ Mito vs Real</button>
-    <button class="tp" onclick='setTp(this,"caso")'>📋 Caso práctico</button>
-    <button class="tp" onclick='setTp(this,"cta")'>📞 Captación</button>
-    <button class="tp" onclick='setTp(this,"dato")'>📊 Dato impactante</button>
-    <button class="tp" onclick='setTp(this,"proceso")'>📑 Paso a paso</button>
+    <button class="tp a" onclick="setTp(this,'consejo')">💡 Consejo</button>
+    <button class="tp" onclick="setTp(this,'derechos')">⚖️ Derechos</button>
+    <button class="tp" onclick="setTp(this,'mito')">❌ Mito vs Real</button>
+    <button class="tp" onclick="setTp(this,'caso')">📋 Caso práctico</button>
+    <button class="tp" onclick="setTp(this,'cta')">📞 Captación</button>
+    <button class="tp" onclick="setTp(this,'dato')">📊 Dato impactante</button>
+    <button class="tp" onclick="setTp(this,'proceso')">📑 Paso a paso</button>
   </div></div>
   <div style="margin-bottom:9px"><label>Tono</label>
   <div class="tps">
-    <button class="tnb s" onclick='setTn(this,"profesional y cercano")'>Profesional</button>
-    <button class="tnb" onclick='setTn(this,"empático y humano")'>Empático</button>
-    <button class="tnb" onclick='setTn(this,"directo e informativo")'>Directo</button>
-    <button class="tnb" onclick='setTn(this,"motivador")'>Motivador</button>
-    <button class="tnb" onclick='setTn(this,"didáctico")'>Didáctico</button>
+    <button class="tnb s" onclick="setTn(this,'profesional y cercano')">Profesional</button>
+    <button class="tnb" onclick="setTn(this,'empático y humano')">Empático</button>
+    <button class="tnb" onclick="setTn(this,'directo e informativo')">Directo</button>
+    <button class="tnb" onclick="setTn(this,'motivador')">Motivador</button>
+    <button class="tnb" onclick="setTn(this,'didáctico')">Didáctico</button>
   </div></div>
   <div class="g2">
     <div><label>Tema específico</label><textarea id="tema-in" placeholder="Ej: despido sin causa, cuota alimentaria..." rows="2"></textarea></div>
@@ -242,8 +242,8 @@ textarea{resize:vertical;min-height:64px;line-height:1.5}
     <label style="display:flex;align-items:center;gap:5px;text-transform:none;font-size:11px;cursor:pointer;margin-bottom:0"><input type="checkbox" id="chk-disc" checked style="width:auto;accent-color:var(--g)"> Aviso legal</label>
   </div>
   <div style="display:flex;gap:7px;justify-content:flex-end;flex-wrap:wrap">
-    <button class="bo" onclick='generar3()'><i class="ti ti-stack"></i> 3 versiones</button>
-    <button class="bg" onclick='generarUno()'><i class="ti ti-sparkles"></i> Generar</button>
+    <button class="bo" onclick="generar3()"><i class="ti ti-stack"></i> 3 versiones</button>
+    <button class="bg" onclick="generarUno()"><i class="ti ti-sparkles"></i> Generar</button>
   </div>
 </div>
 <div id="ld-gen" class="ld" style="display:none"><div class="dots"><span></span><span></span><span></span></div><p style="margin-top:9px;font-size:11px;color:var(--mu)">Generando contenido...</p></div>
@@ -254,8 +254,8 @@ textarea{resize:vertical;min-height:64px;line-height:1.5}
   <div id="dc-box" class="disc" style="display:none"></div>
   <div class="dv"></div>
   <div style="display:flex;gap:5px;flex-wrap:wrap">
-    <button class="cbtn" onclick='copEl("rt-txt")'><i class="ti ti-copy"></i> Copiar</button>
-    <button class="cbtn" onclick='generarUno()'><i class="ti ti-refresh"></i> Regenerar</button>
+    <button class="cbtn" onclick="copEl('rt-txt')"><i class="ti ti-copy"></i> Copiar</button>
+    <button class="cbtn" onclick="generarUno()"><i class="ti ti-refresh"></i> Regenerar</button>
   </div>
 </div>
 <div id="multi-results" style="display:none;margin-top:10px"></div>
@@ -278,7 +278,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.5}
     <div><label>Área</label><select id="cal-area"><option value="laboral">Laboral</option><option value="familia">Familia</option><option value="consumidor">Consumidor</option><option value="art">ART</option><option value="cobranzas">Cobranzas</option><option value="inpi">INPI</option><option value="penal">Penal</option><option value="accidentes">Accidentes</option></select></div>
     <div><label>Cantidad</label><select id="cal-qty"><option value="3">3 publicaciones</option><option value="5">5 publicaciones</option><option value="7">Semana (7)</option></select></div>
   </div>
-  <div style="text-align:right"><button class="bg" onclick='generarCalendario()'><i class="ti ti-calendar-event"></i> Generar calendario</button></div>
+  <div style="text-align:right"><button class="bg" onclick="generarCalendario()"><i class="ti ti-calendar-event"></i> Generar calendario</button></div>
 </div>
 <div id="ld-cal" class="ld" style="display:none"><div class="dots"><span></span><span></span><span></span></div></div>
 <div id="cal-queue" style="display:none"><p style="font-size:11px;font-weight:700;color:var(--n);margin-bottom:8px">Cola programada</p><div id="cal-items"></div></div>
@@ -295,7 +295,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.5}
     <div><label>Formato</label><select id="reel-fmt"><option value="educativo">Educativo</option><option value="storytelling">Storytelling</option><option value="mito">Desmintiendo mitos</option><option value="lista">Lista rápida</option></select></div>
     <div><label>Duración</label><select id="reel-dur"><option value="30">30 segundos</option><option value="60" selected>60 segundos</option><option value="90">90 segundos</option></select></div>
   </div>
-  <div style="text-align:right"><button class="bg" onclick='generarReel()'><i class="ti ti-video"></i> Generar guión</button></div>
+  <div style="text-align:right"><button class="bg" onclick="generarReel()"><i class="ti ti-video"></i> Generar guión</button></div>
 </div>
 <div id="ld-reel" class="ld" style="display:none"><div class="dots"><span></span><span></span><span></span></div></div>
 <div id="reel-result" style="display:none"></div>
@@ -312,7 +312,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.5}
     <div><label>Slides</label><select id="carr-slides"><option value="5">5 slides</option><option value="7" selected>7 slides</option><option value="10">10 slides</option></select></div>
     <div><label>Plataforma</label><select id="carr-red"><option value="Instagram">Instagram</option><option value="LinkedIn">LinkedIn</option></select></div>
   </div>
-  <div style="text-align:right"><button class="bg" onclick='generarCarrusel()'><i class="ti ti-layout-columns"></i> Generar carrusel</button></div>
+  <div style="text-align:right"><button class="bg" onclick="generarCarrusel()"><i class="ti ti-layout-columns"></i> Generar carrusel</button></div>
 </div>
 <div id="ld-carr" class="ld" style="display:none"><div class="dots"><span></span><span></span><span></span></div></div>
 <div id="carr-result" style="display:none"></div>
@@ -329,10 +329,10 @@ textarea{resize:vertical;min-height:64px;line-height:1.5}
     <div><label>Tipo</label><select id="dm-tipo"><option value="DM privado">DM privado</option><option value="comentario público">Comentario público</option><option value="derivación a consulta">Derivar a consulta</option></select></div>
     <div><label>Tono</label><select id="dm-tono"><option value="cálido y profesional">Cálido y profesional</option><option value="directo y concreto">Directo</option><option value="empático">Empático</option></select></div>
   </div>
-  <div style="text-align:right"><button class="bg" onclick='generarDM()'><i class="ti ti-message-circle"></i> Generar respuesta</button></div>
+  <div style="text-align:right"><button class="bg" onclick="generarDM()"><i class="ti ti-message-circle"></i> Generar respuesta</button></div>
 </div>
 <div id="ld-dm" class="ld" style="display:none"><div class="dots"><span></span><span></span><span></span></div></div>
-<div class="rbx" id="dm-result" style="display:none"><div class="rl"><i class="ti ti-message-dots"></i> Respuesta generada</div><div class="rt" id="dm-rt"></div><div class="dv"></div><button class="cbtn" onclick='copEl("dm-rt")'><i class="ti ti-copy"></i> Copiar</button></div>
+<div class="rbx" id="dm-result" style="display:none"><div class="rl"><i class="ti ti-message-dots"></i> Respuesta generada</div><div class="rt" id="dm-rt"></div><div class="dv"></div><button class="cbtn" onclick="copEl('dm-rt')"><i class="ti ti-copy"></i> Copiar</button></div>
 <div style="margin-top:12px"><p style="font-size:11px;font-weight:700;color:var(--n);margin-bottom:8px">Consultas frecuentes:</p><div id="faq-r"></div></div>
 </div>
 
@@ -357,10 +357,10 @@ textarea{resize:vertical;min-height:64px;line-height:1.5}
     <div><label>Tipo</label><select id="wa-tipo"><option value="estado de 24 horas">Estado (24hs)</option><option value="lista de difusión">Difusión</option><option value="respuesta automática">Respuesta auto</option></select></div>
     <div><label>Tema</label><textarea id="wa-tema" placeholder="Consulta gratuita, recupero de expensas..." rows="2"></textarea></div>
   </div>
-  <div style="text-align:right"><button class="bg" onclick='generarWA()'><i class="ti ti-brand-whatsapp"></i> Generar</button></div>
+  <div style="text-align:right"><button class="bg" onclick="generarWA()"><i class="ti ti-brand-whatsapp"></i> Generar</button></div>
 </div>
 <div id="ld-wa" class="ld" style="display:none"><div class="dots"><span></span><span></span><span></span></div></div>
-<div class="rbx" id="wa-result" style="display:none"><div class="rl"><i class="ti ti-brand-whatsapp"></i> Mensaje generado</div><div class="rt" id="wa-rt"></div><div class="dv"></div><button class="cbtn" onclick='copEl("wa-rt")'><i class="ti ti-copy"></i> Copiar</button></div>
+<div class="rbx" id="wa-result" style="display:none"><div class="rl"><i class="ti ti-brand-whatsapp"></i> Mensaje generado</div><div class="rt" id="wa-rt"></div><div class="dv"></div><button class="cbtn" onclick="copEl('wa-rt')"><i class="ti ti-copy"></i> Copiar</button></div>
 </div>
 
 <!-- PRESCRIPCIONES -->
@@ -383,7 +383,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.5}
     <div><label>Fecha del hecho</label><input type="date" id="pr-fecha"></div>
   </div>
   <div><label>Observaciones</label><textarea id="pr-obs" placeholder="CD enviada, acuerdo parcial, etc..." rows="2"></textarea></div>
-  <div style="text-align:right;margin-top:8px"><button class="bg" onclick='calcPrescripcion()'><i class="ti ti-clock-check"></i> Verificar</button></div>
+  <div style="text-align:right;margin-top:8px"><button class="bg" onclick="calcPrescripcion()"><i class="ti ti-clock-check"></i> Verificar</button></div>
 </div>
 <div id="ld-pr" class="ld" style="display:none"><div class="dots"><span></span><span></span><span></span></div></div>
 <div id="pr-result" style="display:none"></div>
@@ -399,7 +399,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.5}
   <p>Pegá acá la URL de tu Worker (termina en <strong style="color:var(--gl)">.workers.dev</strong>). La encontrás en dash.cloudflare.com → Workers &amp; Pages → tu worker.</p>
   <div class="cfg-row">
     <input type="text" class="cfg-input" id="worker-url-input" placeholder="https://grupo-ra-worker.tu-usuario.workers.dev">
-    <button class="cfg-save" onclick='saveWorkerUrl()'>Guardar</button>
+    <button class="cfg-save" onclick="saveWorkerUrl()">Guardar</button>
   </div>
   <div class="cfg-status" id="cfg-status">
     <span class="sd sd-a"></span><span style="color:rgba(255,255,255,.6);font-size:10px">Sin configurar</span>
@@ -415,7 +415,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.5}
     <div><label>WhatsApp</label><input type="text" id="cfg-wa" placeholder="+54 11 XXXX-XXXX"></div>
     <div><label>Web</label><input type="text" id="cfg-web" value="grupora-raffoyasociados.netlify.app"></div>
   </div>
-  <div style="text-align:right;margin-top:8px"><button class="bg" onclick='saveConfig()'><i class="ti ti-check"></i> Guardar datos</button></div>
+  <div style="text-align:right;margin-top:8px"><button class="bg" onclick="saveConfig()"><i class="ti ti-check"></i> Guardar datos</button></div>
 </div>
 </div>
 
@@ -660,7 +660,7 @@ async function generar3(){
       const cap=(raw.match(/\[CAPTION\]([\s\S]*?)(?=\[NORMATIVA_CITADA\]|\[DISCLAIMER\]|$)/)||['',''])[1].trim()||raw;
       const nc=(raw.match(/\[NORMATIVA_CITADA\]([\s\S]*?)(?=\[DISCLAIMER\]|$)/)||['',''])[1].trim();
       const id='mv'+i;
-      return `<div class="multi-ver"><div class="ver-label"><i class="ti ti-file"></i> Versión ${i+1}: ${nombres[tipos[i]]}</div><div class="rt" id="${id}" style="font-size:12px">${cap}</div>${nc?`<div class="ncite"><strong>⚖️</strong> ${nc}</div>`:''}<div class="dv"></div><button class="cbtn" onclick='copEl("${id}")'><i class="ti ti-copy"></i> Copiar</button></div>`;
+      return `<div class="multi-ver"><div class="ver-label"><i class="ti ti-file"></i> Versión ${i+1}: ${nombres[tipos[i]]}</div><div class="rt" id="${id}" style="font-size:12px">${cap}</div>${nc?`<div class="ncite"><strong>⚖️</strong> ${nc}</div>`:''}<div class="dv"></div><button class="cbtn" onclick="copEl('${id}')"><i class="ti ti-copy"></i> Copiar</button></div>`;
     }).join('');
     hist.unshift({area,red,tipo:'3 versiones',texto:results[0].substring(0,80),fecha:new Date()});
     areasU.add(area); updStats(); rendHist();
@@ -688,8 +688,8 @@ function rendQueue(){
       <div class="qi-time">${q.hora}<br><span style="font-size:8px">${rn[q.red]||q.red}</span></div>
       <div class="qi-text">${q.texto.substring(0,120)}...<div class="qi-net"><span class="status-dot ${q.status==='publicado'?'sd-g':'sd-a'}"></span> ${q.status==='publicado'?'Publicado':'Listo'}</div></div>
       <div class="qi-actions">
-        <button class="pub-btn" onclick='publicarItem(${i})'>✓ Publicar</button>
-        <button class="del-btn" onclick='calQueue.splice(${i},1);rendQueue()'>✕</button>
+        <button class="pub-btn" onclick="publicarItem(${i})">✓ Publicar</button>
+        <button class="del-btn" onclick="calQueue.splice(${i},1);rendQueue()">✕</button>
       </div>
     </div>`).join('');
 }
@@ -743,8 +743,8 @@ Formato: [SLIDE_N] ⏱️ Xs-Ys | TITULO\nTexto: "..."\nVoz: "..."
 /g,'<br>')}</div></div>`).join('');
     const ht=(raw.match(/\[HASHTAGS\]([\s\S]*?)(?=\[DESCRIPCION_POST\]|$)/)||['',''])[1].trim();
     const dp=(raw.match(/\[DESCRIPCION_POST\]([\s\S]*?)$/)||['',''])[1].trim();
-    if(ht) rr.innerHTML+=`<div class="rbx" style="margin-top:8px"><div class="rl"><i class="ti ti-hash"></i> Hashtags</div><div class="rt" id="reel-ht" style="font-size:11px">${ht}</div><div class="dv"></div><button class="cbtn" onclick='copEl("reel-ht")'><i class="ti ti-copy"></i> Copiar</button></div>`;
-    if(dp) rr.innerHTML+=`<div class="rbx" style="margin-top:8px"><div class="rl"><i class="ti ti-file-text"></i> Caption</div><div class="rt" id="reel-dp" style="font-size:11px">${dp}</div><div class="dv"></div><button class="cbtn" onclick='copEl("reel-dp")'><i class="ti ti-copy"></i> Copiar</button></div>`;
+    if(ht) rr.innerHTML+=`<div class="rbx" style="margin-top:8px"><div class="rl"><i class="ti ti-hash"></i> Hashtags</div><div class="rt" id="reel-ht" style="font-size:11px">${ht}</div><div class="dv"></div><button class="cbtn" onclick="copEl('reel-ht')"><i class="ti ti-copy"></i> Copiar</button></div>`;
+    if(dp) rr.innerHTML+=`<div class="rbx" style="margin-top:8px"><div class="rl"><i class="ti ti-file-text"></i> Caption</div><div class="rt" id="reel-dp" style="font-size:11px">${dp}</div><div class="dv"></div><button class="cbtn" onclick="copEl('reel-dp')"><i class="ti ti-copy"></i> Copiar</button></div>`;
   }catch(e){
     document.getElementById('ld-reel').style.display='none';
     const rr=document.getElementById('reel-result'); rr.style.display='block';
@@ -762,7 +762,7 @@ async function generarPromptImagen(){
   ir.innerHTML='<div class="ld"><div class="dots"><span></span><span></span><span></span></div></div>';
   try{
     const raw=await callGemini(prompt);
-    ir.innerHTML=`<div class="img-prompt-box"><h4><i class="ti ti-wand"></i> Prompt para IA de imágenes</h4><div class="img-prompt-text" id="img-pt">${raw}</div><div style="margin-top:10px"><button class="cbtn" style="color:var(--gl);border-color:rgba(201,168,76,.3)" onclick='copEl("img-pt")'><i class="ti ti-copy"></i> Copiar</button></div></div>`;
+    ir.innerHTML=`<div class="img-prompt-box"><h4><i class="ti ti-wand"></i> Prompt para IA de imágenes</h4><div class="img-prompt-text" id="img-pt">${raw}</div><div style="margin-top:10px"><button class="cbtn" style="color:var(--gl);border-color:rgba(201,168,76,.3)" onclick="copEl('img-pt')"><i class="ti ti-copy"></i> Copiar</button></div></div>`;
   }catch(e){ showErr(ir,e.message); }
 }
 
@@ -791,7 +791,7 @@ Slide 1: portada. Último slide: CTA "Consultanos → ${CFG.ig}"
       const vis=(lines.find(l=>l.startsWith('VISUAL:'))||'').replace('VISUAL:','').trim();
       return `<div class="carr-slide"><div class="carr-num">SLIDE ${i+1}</div><div class="carr-title">${tit}</div><div class="carr-body">${bod}</div>${vis?`<div style="font-size:9px;color:var(--g);margin-top:4px">🎨 ${vis}</div>`:''}</div>`;
     }).join('');
-    if(cap) cr.innerHTML+=`<div class="rbx" style="margin-top:8px"><div class="rl"><i class="ti ti-file-text"></i> Caption</div><div class="rt" id="carr-cap" style="font-size:11px">${cap}</div><div class="dv"></div><button class="cbtn" onclick='copEl("carr-cap")'><i class="ti ti-copy"></i> Copiar</button></div>`;
+    if(cap) cr.innerHTML+=`<div class="rbx" style="margin-top:8px"><div class="rl"><i class="ti ti-file-text"></i> Caption</div><div class="rt" id="carr-cap" style="font-size:11px">${cap}</div><div class="dv"></div><button class="cbtn" onclick="copEl('carr-cap')"><i class="ti ti-copy"></i> Copiar</button></div>`;
   }catch(e){
     document.getElementById('ld-carr').style.display='none';
     const cr=document.getElementById('carr-result'); cr.style.display='block';
@@ -821,7 +821,7 @@ async function generarDM(){
 
 function rendFAQ(){
   document.getElementById('faq-rapidas').innerHTML=faqR.map(f=>`
-    <div style="background:var(--w);border:1px solid var(--bd);border-radius:7px;padding:9px 11px;margin-bottom:6px;display:flex;align-items:center;gap:8px;cursor:pointer" onclick='usarFAQ("${f.q.replace(/"/g,''")}')">
+    <div style="background:var(--w);border:1px solid var(--bd);border-radius:7px;padding:9px 11px;margin-bottom:6px;display:flex;align-items:center;gap:8px;cursor:pointer" onclick="usarFAQ('${f.q.replace(/'/g,"'")}')">
       <i class="ti ti-question-mark" style="color:var(--g);font-size:14px;flex-shrink:0"></i>
       <span style="font-size:11px;color:var(--n);flex:1">${f.q}</span>
       <button class="cbtn">Usar</button>
@@ -901,7 +901,7 @@ function filtPl(){
   const f=ql?plData.filter(p=>p.t.toLowerCase().includes(ql)||p.a.includes(ql)||p.n.toLowerCase().includes(ql)):plData;
   const el=document.getElementById('pl-grid');
   if(!el) return;
-  el.innerHTML=f.map(p=>`<div class="pc" onclick='usarPl("${p.a}","${p.t.replace(/"/g,''")}')"><div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><i class="ti ${p.i}" style="color:var(--g);font-size:14px"></i><span class="pt">${p.t}</span></div><div class="pd">${p.d}</div><div class="pn"><i class="ti ti-scale" style="font-size:9px"></i> ${p.n}</div></div>`).join('');
+  el.innerHTML=f.map(p=>`<div class="pc" onclick="usarPl('${p.a}','${p.t.replace(/'/g,"'")}')"><div style="display:flex;align-items:center;gap:6px;margin-bottom:3px"><i class="ti ${p.i}" style="color:var(--g);font-size:14px"></i><span class="pt">${p.t}</span></div><div class="pd">${p.d}</div><div class="pn"><i class="ti ti-scale" style="font-size:9px"></i> ${p.n}</div></div>`).join('');
 }
 function usarPl(a,t){ nav('generar'); document.getElementById('area-sel').value=a; document.getElementById('tema-in').value=t; setTimeout(()=>generarUno(),100); }
 
